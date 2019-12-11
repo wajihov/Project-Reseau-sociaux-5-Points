@@ -78,8 +78,25 @@ public class User{
         this.email = email;
         this.password = password;
     }
+    
+   
 
-    public Long getId() {
+    public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
+			@NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(min = 6, max = 100) String password, GenderName gender, String description, ColorName hairColor,
+			ColorName eyesColor, boolean blocked) {
+		super();
+		this.name = name;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.gender = gender;
+		this.description = description;
+		this.hairColor = hairColor;
+		this.eyesColor = eyesColor;
+		this.blocked = blocked;
+	}
+
+	public Long getId() {
         return id;
     }
 
