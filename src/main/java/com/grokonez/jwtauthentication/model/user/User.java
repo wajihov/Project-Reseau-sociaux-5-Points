@@ -62,8 +62,6 @@ public class User{
     	joinColumns = @JoinColumn(name = "user_id"), 
     	inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-    
-    
     private GenderName gender;
     private Date birthdate;
     @OneToMany
@@ -72,9 +70,6 @@ public class User{
     private ColorName hairColor;
     private ColorName eyesColor;
     private boolean blocked;
-    
-    
-    
 
     public User() {}
 
@@ -132,4 +127,60 @@ public class User{
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+	public GenderName getGender() {
+		return gender;
+	}
+
+	public void setGender(GenderName gender) {
+		this.gender = gender;
+	}
+
+	public Date getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	public List<Image> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<Image> photos) {
+		this.photos = photos;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public ColorName getHairColor() {
+		return hairColor;
+	}
+
+	public void setHairColor(ColorName hairColor) {
+		this.hairColor = hairColor;
+	}
+
+	public ColorName getEyesColor() {
+		return eyesColor;
+	}
+
+	public void setEyesColor(ColorName eyesColor) {
+		this.eyesColor = eyesColor;
+	}
+
+	public boolean isBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
+	}
 }
