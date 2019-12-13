@@ -67,6 +67,7 @@ public class User {
 	private ColorName hairColor;
 	private ColorName eyesColor;
 	private boolean blocked;
+	private boolean enabled;
 
 	public User() {
 	}
@@ -80,7 +81,7 @@ public class User {
 
 	public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
 			@NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(min = 6, max = 100) String password,
-			GenderName gender, String description, ColorName hairColor, ColorName eyesColor, boolean blocked,
+			GenderName gender, String description, ColorName hairColor, ColorName eyesColor,
 			Date birthdate) {
 		super();
 		this.name = name;
@@ -91,7 +92,6 @@ public class User {
 		this.description = description;
 		this.hairColor = hairColor;
 		this.eyesColor = eyesColor;
-		this.blocked = blocked;
 		this.birthdate = birthdate;
 	}
 
@@ -198,4 +198,13 @@ public class User {
 	public void setBlocked(boolean blocked) {
 		this.blocked = blocked;
 	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
 }
