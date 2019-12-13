@@ -79,7 +79,7 @@ public class AuthRestAPIs {
 
 		User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
 				encoder.encode(signUpRequest.getPassword()), signUpRequest.getGender(), signUpRequest.getDescription(),
-				signUpRequest.getHairColor(), signUpRequest.getEyesColor(), signUpRequest.isBlocked(),
+				signUpRequest.getHairColor(), signUpRequest.getEyesColor(),
 				signUpRequest.getBirthdate());
 
 		Set<String> strRoles = signUpRequest.getRole();
@@ -106,6 +106,8 @@ public class AuthRestAPIs {
 			}
 		});
 
+		user.setEnabled(true);
+		user.setBlocked(false);
 		user.setRoles(roles);
 		userRepository.save(user);
 
