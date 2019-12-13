@@ -1,4 +1,4 @@
-package com.grokonez.jwtauthentication.controller;
+package com.grokonez.jwtauthentication.controller.Impl;
 
 import java.util.HashSet;
 import java.util.Set;

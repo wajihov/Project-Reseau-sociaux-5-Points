@@ -1,4 +1,4 @@
-package com.grokonez.jwtauthentication.controller;
+package com.grokonez.jwtauthentication.controller.Impl;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;

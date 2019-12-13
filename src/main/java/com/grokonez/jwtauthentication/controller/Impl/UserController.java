@@ -1,6 +1,7 @@
-package com.grokonez.jwtauthentication.controller;
+package com.grokonez.jwtauthentication.controller.Impl;
 
 
+import com.grokonez.jwtauthentication.controller.interfaces.IUserController;
 import com.grokonez.jwtauthentication.model.user.User;
 import com.grokonez.jwtauthentication.service.Impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,13 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/users/")
-public class UserController {
+public class UserController implements IUserController {
     @Autowired
-    private UserService userDAO;
+    private UserService userService;
 
     //Récupérer la liste des users
     @RequestMapping(value="/getAll", method= RequestMethod.GET)
     public List<User> getAllUsers() {
-        return userDAO.findAll();
+        return userService.findAll();
     }
 }
