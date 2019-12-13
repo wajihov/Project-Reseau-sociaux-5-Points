@@ -64,7 +64,9 @@ public class User {
 	@OneToMany
 	private List<Image> photos;
 	private String description;
+	@Enumerated(EnumType.STRING)
 	private ColorName hairColor;
+	@Enumerated(EnumType.STRING)
 	private ColorName eyesColor;
 	private boolean blocked;
 	private boolean enabled;
