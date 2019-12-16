@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-// test
 import java.util.List;
-import java.util.Optional;
+
+// test
 
 @Component
 public class UserService implements IUserService {
@@ -23,6 +23,11 @@ public class UserService implements IUserService {
 
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User updateProfile(Long id, User u) {
+        return null;
     }
 
     public User getUserById(Long userId) {
