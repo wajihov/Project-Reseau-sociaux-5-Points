@@ -24,25 +24,39 @@ public class UserController implements IUserController {
 	@Autowired
 	private UserService userService;
 
-    //Récupérer la liste des users
-    @GetMapping("/getAll")
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok().body(userService.findAll());
-    }
+	// Récupérer la liste des users
+	@GetMapping("/getAll")
+	public ResponseEntity<List<User>> getAllUsers() {
+		return ResponseEntity.ok().body(userService.findAll());
+	}
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long userId)
-    {
-        User user = userService.getUserById(userId);
-        return ResponseEntity.ok().body(user);
-    }
+	@GetMapping("/get/{id}")
+	public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long userId) {
+		User user = userService.getUserById(userId);
+		return ResponseEntity.ok().body(user);
+	}
 
-    @PutMapping("/updateAccount/{id}")
-    public ResponseEntity<User> updateAccountUser(@PathVariable(value = "id") Long userId, @RequestBody User userDetails)
-    {
-        if (userService.getUserByUsername(userDetails.getUsername()))
-            return ResponseEntity.status(HttpStatus.IM_USED).body(userDetails);
-        User user = userService.updateAccountUser(userId,userDetails);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
-    }
+	@PutMapping("/updateAccount/{id}")
+	public ResponseEntity<User> updateAccountUser(@PathVariable(value = "id") Long userId,
+			@RequestBody User userDetails) {
+		if (userService.getUserByUsername(userDetails.getUsername()))
+			return ResponseEntity.status(HttpStatus.IM_USED).body(userDetails);
+		User user = userService.updateAccountUser(userId, userDetails);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
+	}
+
+	@PutMapping("/updateProfile/{id}")
+	public ResponseEntity<User> updateProfileUser(@PathVariable(value = "id") Long userId,
+			@RequestBody User userDetails) {
+//        if (userService.getUserByUsername(userDetails.getUsername()))
+//            return ResponseEntity.status(HttpStatus.IM_USED).body(userDetails);
+//        User user = userService.updateAccountUser(userId,userDetails);
+//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
+//		System.out.println("Dans Profile : " + userDetails.getDescription());
+//		User user = userService.updateProfile(userId, userDetails);
+		// return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
+		User user = userService.updateProfile(userId, userDetails);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
+	}
+
 }

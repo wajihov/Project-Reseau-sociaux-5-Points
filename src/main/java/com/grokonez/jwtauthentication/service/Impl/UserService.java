@@ -18,13 +18,17 @@ public class UserService implements IUserService {
 	@Override
 	public User updateProfile(Long id, User u) {
 		User user = userRepository.findById(id).get();
-		System.out.println("Dans Update " + user.getUsername());
 		try {
-			user.setBirthdate(u.getBirthdate());
-			user.setDescription(u.getDescription());
-			user.setEyesColor(u.getEyesColor());
-			user.setGender(u.getGender());
-			user.setHairColor(u.getHairColor());
+			if (u.getDescription() != null)
+				user.setDescription(u.getDescription());
+			if (u.getBirthdate() != null)
+				user.setBirthdate(u.getBirthdate());
+			if (u.getEyesColor() != null)
+				user.setEyesColor(u.getEyesColor());
+			if (u.getGender() != null)
+				user.setGender(u.getGender());
+			if (u.getHairColor() != null)
+				user.setHairColor(u.getHairColor());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -32,7 +36,6 @@ public class UserService implements IUserService {
 		return UpdateUser;
 	}
 
-	// used in UpdateAccount ( encode the password again )
 	@Autowired
 	PasswordEncoder encoder;
 
@@ -51,7 +54,6 @@ public class UserService implements IUserService {
 	public User updateAccountUser(Long id, User user) {
 		User u = userRepository.findUserById(id);
 		u.setPassword(encoder.encode(user.getPassword()));
-		u.setEnabled(user.isEnabled());
 		User updatedUser = userRepository.save(u);
 		return updatedUser;
 	}
