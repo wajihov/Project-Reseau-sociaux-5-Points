@@ -34,10 +34,16 @@ public class UserService implements IUserService {
 
     public User updateAccountUser(Long id,User user)
     {
+        System.out.println("user = "+user.toString());
         User u = userRepository.findUserById(id);
-        u.setPassword(encoder.encode(user.getPassword()));
-        u.setEnabled(user.isEnabled());
+        if(user.getPassword()!=null)
+            u.setPassword(encoder.encode(user.getPassword()));
+        if(user.isEnabled() || !user.isEnabled())
+            u.setEnabled(user.isEnabled());
+        if(user.getUsername() !=null)
+            u.setUsername(user.getUsername());
         User updatedUser = userRepository.save(u);
+        System.out.println("Updateduser = "+updatedUser.toString());
         return updatedUser ;
     }
 }
