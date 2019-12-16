@@ -208,5 +208,24 @@ public class User {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", username='" + username + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", roles=" + roles +
+				", gender=" + gender +
+				", birthdate=" + birthdate +
+				", photos=" + photos +
+				", description='" + description + '\'' +
+				", hairColor=" + hairColor +
+				", eyesColor=" + eyesColor +
+				", blocked=" + blocked +
+				", enabled=" + enabled +
+				'}';
+	}
 }
