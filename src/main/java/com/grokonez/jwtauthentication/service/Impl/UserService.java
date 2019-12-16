@@ -1,15 +1,15 @@
 package com.grokonez.jwtauthentication.service.Impl;
 
-import com.grokonez.jwtauthentication.model.user.User;
-import com.grokonez.jwtauthentication.repository.UserRepository;
-import com.grokonez.jwtauthentication.service.interfaces.IUserService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import com.grokonez.jwtauthentication.model.user.User;
+import com.grokonez.jwtauthentication.repository.UserRepository;
+import com.grokonez.jwtauthentication.service.interfaces.IUserService;
 
-// test
 
 @Component
 public class UserService implements IUserService {
@@ -25,10 +25,6 @@ public class UserService implements IUserService {
         return userRepository.findAll();
     }
 
-    @Override
-    public User updateProfile(Long id, User u) {
-        return null;
-    }
 
     public User getUserById(Long userId) {
         return  userRepository.findUserById(userId);
@@ -51,4 +47,27 @@ public class UserService implements IUserService {
         System.out.println("Updateduser = "+updatedUser.toString());
         return updatedUser ;
     }
+
+
+	@Override
+	public User updateProfile(Long id, User u) {
+		User user = userRepository.findById(id).get();
+		try {
+			if (u.getDescription() != null)
+				user.setDescription(u.getDescription());
+			if (u.getBirthdate() != null)
+				user.setBirthdate(u.getBirthdate());
+			if (u.getEyesColor() != null)
+				user.setEyesColor(u.getEyesColor());
+			if (u.getGender() != null)
+				user.setGender(u.getGender());
+			if (u.getHairColor() != null)
+				user.setHairColor(u.getHairColor());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		User UpdateUser = userRepository.save(user);
+		return UpdateUser;
+	}
+
 }
