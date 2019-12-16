@@ -10,6 +10,6 @@ public interface IUserService {
 
 	public User updateProfile(Long id, User u);
 
-	public User getUser(Long id);
+	public User getUserById(Long id);
 
 }
