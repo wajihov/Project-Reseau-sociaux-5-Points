@@ -3,6 +3,7 @@ package com.grokonez.jwtauthentication.service.Impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -65,6 +66,13 @@ public class UserService implements IUserService {
 		User updatedUser = userRepository.save(u);
 		System.out.println("Updateduser = " + updatedUser.toString());
 		return updatedUser;
+	}
+
+	@Override
+	public User getUserConnect(String username) {
+		User user = userRepository.findByUsername(username).orElseThrow(
+				() -> new UsernameNotFoundException("User Not Found with -> username or email : " + username));
+		return user;
 	}
 
 }

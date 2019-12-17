@@ -61,8 +61,10 @@ public class User {
 	private GenderName gender;
 	@Temporal(TemporalType.DATE)
 	private Date birthdate;
-	@OneToMany
-	private List<Image> photos;
+
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Image> images;
+
 	private String description;
 	@Enumerated(EnumType.STRING)
 	private ColorName hairColor;
@@ -83,8 +85,7 @@ public class User {
 
 	public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
 			@NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(min = 6, max = 100) String password,
-			GenderName gender, String description, ColorName hairColor, ColorName eyesColor,
-			Date birthdate) {
+			GenderName gender, String description, ColorName hairColor, ColorName eyesColor, Date birthdate) {
 		super();
 		this.name = name;
 		this.username = username;
@@ -161,14 +162,6 @@ public class User {
 		this.birthdate = birthdate;
 	}
 
-	public List<Image> getPhotos() {
-		return photos;
-	}
-
-	public void setPhotos(List<Image> photos) {
-		this.photos = photos;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -209,23 +202,19 @@ public class User {
 		this.enabled = enabled;
 	}
 
+	public List<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
+
 	@Override
 	public String toString() {
-		return "User{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", username='" + username + '\'' +
-				", email='" + email + '\'' +
-				", password='" + password + '\'' +
-				", roles=" + roles +
-				", gender=" + gender +
-				", birthdate=" + birthdate +
-				", photos=" + photos +
-				", description='" + description + '\'' +
-				", hairColor=" + hairColor +
-				", eyesColor=" + eyesColor +
-				", blocked=" + blocked +
-				", enabled=" + enabled +
-				'}';
+		return "User{" + "id=" + id + ", name='" + name + '\'' + ", username='" + username + '\'' + ", email='" + email
+				+ '\'' + ", password='" + password + '\'' + ", roles=" + roles + ", gender=" + gender + ", birthdate="
+				+ birthdate + " description='" + description + '\'' + ", hairColor=" + hairColor + ", eyesColor="
+				+ eyesColor + ", blocked=" + blocked + ", enabled=" + enabled + '}';
 	}
 }
