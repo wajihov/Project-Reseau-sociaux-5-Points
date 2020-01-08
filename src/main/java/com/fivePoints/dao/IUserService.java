@@ -15,7 +15,7 @@ public interface IUserService {
 	public boolean getUserByUsername(String username);
 
 	public User updateAccountUser(Long id, User user);
-	
+
 	public User getUserConnect(String username);
 
 }

@@ -1,5 +1,6 @@
 package com.fivePoints.security;
 
+import com.fivePoints.dao.UserService;
 import com.fivePoints.entities.User;
 import com.fivePoints.security.domaine.RoleRepository;
 import com.fivePoints.security.domaine.UserRepository;
@@ -44,8 +45,13 @@ public class AuthRestAPIs {
 	@Autowired
 	JwtProvider jwtProvider;
 
+	@Autowired
+	UserService userService;
+
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
+
+		System.out.println("authentification : " + loginRequest.getUsername() + " " + loginRequest.getPassword());
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -54,6 +60,23 @@ public class AuthRestAPIs {
 
 		String jwt = jwtProvider.generateJwtToken(authentication);
 		return ResponseEntity.ok(new JwtResponse(jwt));
+	}
+
+	@PostMapping("/username")
+	public Boolean existUsername(@RequestBody LoginForm loginRequest) {
+		// if (userRepository.existsByUsername(loginRequest.getUsername()))
+		if (userService.getUserByUsername(loginRequest.getUsername()))
+			return true;
+		else
+			return false;
+	}
+
+	@PostMapping("/email")
+	public Boolean existMail(@RequestBody LoginForm loginForm) {
+		if (userRepository.existsByEmail(loginForm.getEmail()))
+			return true;
+		else
+			return false;
 	}
 
 	@PostMapping("/signup")

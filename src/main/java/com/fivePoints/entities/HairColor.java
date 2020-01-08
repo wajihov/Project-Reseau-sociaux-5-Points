@@ -1,5 +1,5 @@
 package com.fivePoints.entities;
 
 public enum HairColor {
-	Black, Blond, White
+	Black, Blond, White, Blue
 }
