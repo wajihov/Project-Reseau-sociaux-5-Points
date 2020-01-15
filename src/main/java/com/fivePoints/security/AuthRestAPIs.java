@@ -27,7 +27,7 @@ import java.util.Set;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/auth/")
 public class AuthRestAPIs {
 
 	@Autowired
@@ -59,7 +59,8 @@ public class AuthRestAPIs {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		String jwt = jwtProvider.generateJwtToken(authentication);
-		return ResponseEntity.ok(new JwtResponse(jwt));
+		String user = jwtProvider.generateJwtTokenUser(authentication);
+		return ResponseEntity.ok(new JwtResponse(jwt, user));
 	}
 
 	@PostMapping("/username")

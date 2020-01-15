@@ -2,10 +2,13 @@ package com.fivePoints.security.jwt;
 
 public class JwtResponse {
     private String token;
+    //private String user;
+
     private String type = "Bearer";
 
-    public JwtResponse(String accessToken) {
+    public JwtResponse(String accessToken, String user) {
         this.token = accessToken;
+        //this.user = user;
     }
 
     public String getAccessToken() {
@@ -23,4 +26,13 @@ public class JwtResponse {
     public void setTokenType(String tokenType) {
         this.type = tokenType;
     }
+
+	/*public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}*/
+    
 }

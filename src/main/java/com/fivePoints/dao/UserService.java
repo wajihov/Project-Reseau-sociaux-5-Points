@@ -62,6 +62,10 @@ public class UserService implements IUserService {
 			u.setEnabled(user.isEnabled());
 		if (user.getUsername() != null)
 			u.setUsername(user.getUsername());
+		if (user.getEmail() != null)
+			u.setEmail(user.getEmail());
+		if(user.getName()!=null)
+			u.setName(user.getName());
 		User updatedUser = userRepository.save(u);
 		System.out.println("Updateduser = " + updatedUser.toString());
 		return updatedUser;

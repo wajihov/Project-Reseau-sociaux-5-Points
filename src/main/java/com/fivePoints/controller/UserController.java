@@ -47,7 +47,19 @@ public class UserController {
 		if (userService.getUserByUsername(userDetails.getUsername()))
 			return ResponseEntity.status(HttpStatus.IM_USED).body(userDetails);
 		User user = userService.updateAccountUser(userId, userDetails);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
+		
+		
+		
+//		Authentication authentication = authenticationManager.authenticate(
+//				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+//
+//		SecurityContextHolder.getContext().setAuthentication(authentication);
+//
+//		String jwt = jwtProvider.generateJwtToken(authentication);
+//		String user = jwtProvider.generateJwtTokenUser(authentication);
+//		return ResponseEntity.ok(new JwtResponse(jwt, user));
+
+		 return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
 	}
 
 	@PutMapping("/updateProfile/{id}")
@@ -57,8 +69,9 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
 	}
 
-	@GetMapping("/getUser/{usernameConnect}")
-	public Optional<User> getUser(@PathVariable(value = "usernameConnect") String username) {
+	@GetMapping("/getUser/{usernameConnected}")
+	public Optional<User> getUser(@PathVariable(value = "usernameConnected") String username) {
+		System.out.println("hello dans GetUsername : " + username);
 		Optional<User> u = userRepository.findByUsername(username);
 		if (u != null)
 			return u;
@@ -68,6 +81,7 @@ public class UserController {
 
 	@PostMapping("/majUsername")
 	public Long existUsername(@RequestBody LoginForm loginRequest) {
+		System.out.println("username : " + loginRequest.getUsername());
 		if (userService.getUserByUsername(loginRequest.getUsername())) {
 			User u = userService.getUserConnect(loginRequest.getUsername());
 			return u.getId();
@@ -76,12 +90,21 @@ public class UserController {
 	}
 
 	@PostMapping("/majEmail")
-	public Long existMail(@RequestBody LoginForm username, @RequestBody LoginForm email) {
+	public Long existMail(@RequestBody LoginForm email) {
 		if (userRepository.existsByEmail(email.getEmail())) {
-			User u = userService.getUserConnect(username.getUsername());
+			// User u = userService.getUserConnect(username.getUsername());
+			User u = userRepository.findByEmail(email.getEmail());			
 			return u.getId();
 		} else
 			return 0L;
 	}
+
+//	@PostMapping("/userEmail")
+//	public User getUserByEmail(@RequestBody String email) {
+//		if (userRepository.existsByEmail(email)) {
+//			return userRepository.findByEmail(email);
+//		} else
+//			return null;
+//	}
 
 }

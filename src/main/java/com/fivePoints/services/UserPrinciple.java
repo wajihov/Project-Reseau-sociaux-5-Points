@@ -109,4 +109,10 @@ public class UserPrinciple implements UserDetails {
         UserPrinciple user = (UserPrinciple) o;
         return Objects.equals(id, user.id);
     }
+
+	@Override
+	public String toString() {
+		return "{id:" + id + ", name:" + name + ", username:" + username + ", email:" + email + "}";
+	}
+    
 }

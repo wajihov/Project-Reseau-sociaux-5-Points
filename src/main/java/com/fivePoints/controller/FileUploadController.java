@@ -25,7 +25,7 @@ import com.fivePoints.entities.User;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/image/")
+@RequestMapping("/api/image")
 public class FileUploadController {
 
 	@Value("${dir.image}")
