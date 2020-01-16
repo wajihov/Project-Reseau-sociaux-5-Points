@@ -16,9 +16,13 @@ public class UserService implements IUserService {
 	@Autowired
 	private UserRepository userRepository;
 
+	// used in UpdateAccount ( encode the password again )
+	@Autowired
+	PasswordEncoder encoder;
+
 	@Override
 	public User updateProfile(Long id, User u) {
-		User user = userRepository.findById(id).get();
+		User user = userRepository.findById(id).get();		
 		try {
 			if (u.getDescription() != null)
 				user.setDescription(u.getDescription());
@@ -37,10 +41,6 @@ public class UserService implements IUserService {
 		return UpdateUser;
 	}
 
-	// used in UpdateAccount ( encode the password again )
-	@Autowired
-	PasswordEncoder encoder;
-
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
@@ -53,7 +53,7 @@ public class UserService implements IUserService {
 		return userRepository.existsByUsername(username);
 	}
 
-	public User updateAccountUser(Long id, User user) {
+	public User updateAccountUser(Long id, User user) {		
 		System.out.println("user = " + user.toString());
 		User u = userRepository.findUserById(id);
 		if (user.getPassword() != null)
@@ -64,8 +64,9 @@ public class UserService implements IUserService {
 			u.setUsername(user.getUsername());
 		if (user.getEmail() != null)
 			u.setEmail(user.getEmail());
-		if(user.getName()!=null)
+		if (user.getName() != null)
 			u.setName(user.getName());
+		userRepository.flush();
 		User updatedUser = userRepository.save(u);
 		System.out.println("Updateduser = " + updatedUser.toString());
 		return updatedUser;
@@ -76,6 +77,16 @@ public class UserService implements IUserService {
 		User user = userRepository.findByUsername(username).orElseThrow(
 				() -> new UsernameNotFoundException("User Not Found with -> username or email : " + username));
 		return user;
+	}
+
+	@Override
+	public boolean comparePassword(String password, Long id) {
+		User u = userRepository.findUserById(id);
+		if (encoder.matches(password, u.getPassword())) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

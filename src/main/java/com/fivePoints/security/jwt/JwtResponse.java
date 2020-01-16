@@ -6,7 +6,7 @@ public class JwtResponse {
 
     private String type = "Bearer";
 
-    public JwtResponse(String accessToken, String user) {
+    public JwtResponse(String accessToken) {
         this.token = accessToken;
         //this.user = user;
     }

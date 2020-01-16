@@ -49,18 +49,18 @@ public class AuthRestAPIs {
 	UserService userService;
 
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
-
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {	
+		
 		System.out.println("authentification : " + loginRequest.getUsername() + " " + loginRequest.getPassword());
-
+		
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		String jwt = jwtProvider.generateJwtToken(authentication);
-		String user = jwtProvider.generateJwtTokenUser(authentication);
-		return ResponseEntity.ok(new JwtResponse(jwt, user));
+		//String user = jwtProvider.generateJwtTokenUser(authentication);
+		return ResponseEntity.ok(new JwtResponse(jwt));
 	}
 
 	@PostMapping("/username")

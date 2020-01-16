@@ -4,12 +4,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class LoginForm {
+
+	private Long id;
 	@NotBlank
 	@Size(min = 3, max = 60)
 	private String username;
 
 	@NotBlank
-	@Size(min = 6, max = 40)
+	@Size(min = 6)
 	private String password;
 
 	private String email;
@@ -36,6 +38,14 @@ public class LoginForm {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

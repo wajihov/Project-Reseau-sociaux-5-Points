@@ -17,5 +17,7 @@ public interface IUserService {
 	public User updateAccountUser(Long id, User user);
 
 	public User getUserConnect(String username);
+	
+	public boolean comparePassword(String password, Long id);
 
 }

@@ -24,8 +24,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.NaturalId;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fivePoints.security.entities.Role;
@@ -46,7 +44,6 @@ public class User {
 	@Size(min = 3, max = 50)
 	private String username;
 
-	@NaturalId
 	@NotBlank
 	@Size(max = 50)
 	@Email
