@@ -24,8 +24,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fivePoints.security.entities.Role;
 
 @Entity
@@ -61,7 +59,6 @@ public class User {
 	@Temporal(TemporalType.DATE)
 	private Date birthdate;
 
-	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Image> images;
 
@@ -202,12 +199,10 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	@JsonIgnore
 	public List<Image> getImages() {
 		return images;
 	}
 
-	@JsonSetter
 	public void setImages(List<Image> images) {
 		this.images = images;
 	}

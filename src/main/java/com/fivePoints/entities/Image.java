@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 @Entity
 public class Image {
 
@@ -16,7 +19,7 @@ public class Image {
 	private Long id;
 	@Column(length = 80)
 	private String name;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "codeUser")
 	private User user;
@@ -37,10 +40,12 @@ public class Image {
 		this.name = name;
 	}
 
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
 
+	@JsonSetter
 	public void setUser(User user) {
 		this.user = user;
 	}
