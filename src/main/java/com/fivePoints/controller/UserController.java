@@ -24,13 +24,19 @@ import com.fivePoints.services.LoginForm;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/users/")
+@RequestMapping("/api/users")
 public class UserController {
 	@Autowired
 	private UserService userService;
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	AuthenticationManager authenticationManager;
+
+	@Autowired
+	JwtProvider jwtProvider;
 
 	@GetMapping("/getAll")
 	public ResponseEntity<List<User>> getAllUsers() {
@@ -42,12 +48,6 @@ public class UserController {
 		User user = userService.getUserById(userId);
 		return ResponseEntity.ok().body(user);
 	}
-
-	@Autowired
-	AuthenticationManager authenticationManager;
-
-	@Autowired
-	JwtProvider jwtProvider;
 
 	@PutMapping("/updateAccount/{id}")
 	public ResponseEntity<?> updateAccountUser(@PathVariable(value = "id") Long userId, @RequestBody User userDetails) {
