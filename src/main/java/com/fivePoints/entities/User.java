@@ -61,6 +61,9 @@ public class User {
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Image> images;
+	
+	@OneToMany(mappedBy = "mat", fetch = FetchType.LAZY)
+	private List<Matching> matchings;
 
 	private String description;
 	@Enumerated(EnumType.STRING)

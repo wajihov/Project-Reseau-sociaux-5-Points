@@ -1,20 +1,26 @@
 package com.fivePoints.controller;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.ResourceUtils;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -87,11 +93,11 @@ public class FileUploadController {
 		File file = ResourceUtils.getFile(imageDir + "3.jpg");
 		String content = new String(Files.readAllBytes(file.toPath()));
 		System.out.println("image" + content);
-		//MessageResponse message = new MessageResponse("Image displayed succefully");
-		//return new ResponseEntity<>(content, HttpStatus.OK);
+		// MessageResponse message = new MessageResponse("Image displayed succefully");
+		// return new ResponseEntity<>(content, HttpStatus.OK);
 		return content;
 	}
-	
+
 	/*
 	 * @RequestMapping(value = "/get-file",method = RequestMethod.GET) public void
 	 * getImage(HttpServletResponse response) throws IOException { Long a = new
@@ -163,6 +169,42 @@ public class FileUploadController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+	}
+
+	/*
+	 * public ResponseEntity<Resource> downloadFile(@PathVariable String fileName,
+	 * HttpServletRequest request){ // load file as resource Resource resource
+	 * return null; }
+	 */
+
+	@RequestMapping(value = "/sid-image/{nameImg}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public void getImage(@PathVariable(value = "nameImg") String nameImage, HttpServletResponse response)
+			throws IOException {
+
+		InputStreamSource imgFile = new ClassPathResource("/Images/" + nameImage);
+		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+		StreamUtils.copy(imgFile.getInputStream(), response.getOutputStream());
+	}
+
+	/*@RequestMapping(value = "/sid/{nameImage}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public void getImage2(@PathVariable(value = "nameImage") String imgNom, String nameImage,
+			HttpServletResponse response) throws IOException {
+
+		System.out.println("le nom de l'image est : " + imgNom);
+
+		InputStreamSource imgFile = new ClassPathResource(
+				"C:\\Travail Eclipse\\Photon2\\Spring + Akoum\\springdemo\\Upload\\" + imgNom);
+		FileInputStream img = new FileInputStream(
+				new File("C:\\Travail Eclipse\\Photon2\\Spring + Akoum\\springdemo\\Upload\\" + imgNom));
+		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+		StreamUtils.copy(img, response.getOutputStream());
+	}*/
+
+	@RequestMapping(value = "/sidImage/{nameImage}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public ResponseEntity<byte[]> getImage(@PathVariable(value = "nameImage") String nameImage) throws IOException {
+		FileInputStream imgFile = new FileInputStream(new File(imageDir + nameImage));
+		byte[] bytes = StreamUtils.copyToByteArray(imgFile);
+		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(bytes);
 	}
 
 }
