@@ -61,9 +61,12 @@ public class User {
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Image> images;
-	
-	@OneToMany(mappedBy = "mat", fetch = FetchType.LAZY)
-	private List<Matching> matchings;
+
+	@OneToMany(mappedBy = "idFrom", fetch = FetchType.LAZY)
+	private List<Matching> users;
+
+	@OneToMany(mappedBy = "idTo", fetch = FetchType.LAZY)
+	private List<Matching> UserMatching;
 
 	private String description;
 	@Enumerated(EnumType.STRING)
@@ -208,6 +211,22 @@ public class User {
 
 	public void setImages(List<Image> images) {
 		this.images = images;
+	}
+
+	public List<Matching> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<Matching> users) {
+		this.users = users;
+	}
+
+	public List<Matching> getUserMatching() {
+		return UserMatching;
+	}
+
+	public void setUserMatching(List<Matching> userMatching) {
+		UserMatching = userMatching;
 	}
 
 	@Override

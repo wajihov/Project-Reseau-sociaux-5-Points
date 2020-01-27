@@ -1,14 +1,13 @@
 package com.fivePoints.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.ManyToAny;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 @Entity
 public class Matching {
@@ -16,11 +15,20 @@ public class Matching {
 	@Id
 	@GeneratedValue
 	private Long idMatching;
-	@ManyToOne(fetch = FetchType.LAZY)
-	private User from;
-	@ManyToOne(fetch = FetchType.LAZY)
-	private User to;
-	private String etatDemande;
+
+	@ManyToOne
+	@JoinColumn(name = "idFrom")
+	private User idFrom;
+
+	@ManyToOne
+	@JoinColumn(name = "idTo")
+	private User idTo;
+
+	private EtatDemande state;
+
+	public Matching() {
+		super();
+	}
 
 	public Long getIdMatching() {
 		return idMatching;
@@ -30,24 +38,39 @@ public class Matching {
 		this.idMatching = idMatching;
 	}
 
-	public User getFrom() {
-		return from;
+	@JsonIgnore
+	public User getIdFrom() {
+		return idFrom;
 	}
 
-	public void setFrom(User from) {
-		this.from = from;
+	@JsonSetter
+	public void setIdFrom(User idFrom) {
+		this.idFrom = idFrom;
 	}
 
-	public User getTo() {
-		return to;
+	@JsonIgnore
+	public User getIdTo() {
+		return idTo;
 	}
 
-	public void setTo(User to) {
-		this.to = to;
+	@JsonSetter
+	public void setIdTo(User idTo) {
+		this.idTo = idTo;
 	}
 
-	public Matching() {
+	public EtatDemande getState() {
+		return state;
+	}
+
+	public void setState(EtatDemande state) {
+		this.state = state;
+	}
+
+	public Matching(User idFrom, User idTo, EtatDemande state) {
 		super();
+		this.idFrom = idFrom;
+		this.idTo = idTo;
+		this.state = state;
 	}
 
 }
