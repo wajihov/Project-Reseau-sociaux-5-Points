@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/users")
 public class MatchingController {
-	
+
 	@PostMapping("/matching/{idFrom}/{idTo}")
 	public void matchingFriend(Long idTo, Long idFrom) {
-		
+
 	}
 
 }
