@@ -89,4 +89,14 @@ public class UserService implements IUserService {
 		}
 	}
 
+	@Override
+	public List<User> getAllMale() {
+		return userRepository.findMale();
+	}
+
+	@Override
+	public List<User> getAllFemele() {
+		return userRepository.findFemale();
+	}
+
 }

@@ -98,5 +98,15 @@ public class UserController {
 	public Boolean verifPassword(@RequestBody LoginForm password) {
 		return userService.comparePassword(password.getPassword(), password.getId());
 	}
+	
+	@GetMapping("/allMale")
+	public List<User> getAllMale(){
+		return userService.getAllMale();
+	}
+	
+	@GetMapping("/allFemele")
+	public List<User> getAllFemele(){
+		return userService.getAllFemele();
+	}
 
 }
