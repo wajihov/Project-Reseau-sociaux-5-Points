@@ -24,7 +24,7 @@ public class MatchingServiceImpl implements IMatching {
 	public ResponseEntity<Matching> addMatching(Long idFrom, Long idTo) {
 		Matching matching = new Matching();
 		User userFrom = userRepository.findUserById(idFrom);
-		User UserTo = userRepository.findUserById(idTo);
+		User UserTo = userRepository.findUserById(idTo);		
 		matching.setIdFrom(userFrom);
 		matching.setIdTo(UserTo);
 		matching.setState(EtatDemande.waiting);

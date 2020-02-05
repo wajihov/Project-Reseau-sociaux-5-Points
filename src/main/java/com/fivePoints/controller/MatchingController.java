@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fivePoints.dao.FormMatching;
 import com.fivePoints.dao.MatchingServiceImpl;
 
 @CrossOrigin(origins = "*")
@@ -19,9 +21,12 @@ public class MatchingController {
 	@Autowired
 	MatchingServiceImpl matchingServiceImpl;
 
-	@PostMapping("/matching/{idFrom}/{idTo}")
-	public void matching(@PathVariable(name = "idFrom") Long idFrom, @PathVariable(name = "idTo") Long idTo) {
-		matchingServiceImpl.addMatching(idFrom, idTo);
+	@PostMapping("/matching")
+	public void matching(@RequestBody FormMatching formMatching) {
+		System.out.println("hello dans matching");
+		System.out.println("idForm " + formMatching.getIdFrom() + " idTo " + formMatching.getIdTo());
+		if (formMatching.getIdFrom() != null && formMatching.getIdTo() != null)
+			matchingServiceImpl.addMatching(formMatching.getIdFrom(), formMatching.getIdTo());
 	}
 
 	@PutMapping("/friendly/{idMatching}")
