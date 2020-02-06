@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -52,6 +53,9 @@ public class FileUploadController {
 
 	@Autowired
 	private UserService userService;
+
+//	@Autowired
+//	private ImageService imageService;
 
 	@GetMapping("/get-image/{nameImage}")
 	public @ResponseBody File getText(@PathVariable(value = "nameImage") String name) throws IOException {
@@ -234,11 +238,15 @@ public class FileUploadController {
 		try {
 			data = IOUtils.toByteArray(new FileInputStream(file));
 		} catch (IOException e) {
-			File file2 = new File(imageDir + "defaultImage-.jpg");		
+			File file2 = new File(imageDir + "defaultImage-.jpg");
 			data = IOUtils.toByteArray(new FileInputStream(file2));
 		}
 		return new ResponseEntity<byte[]>(data, HttpStatus.OK);
+	}
 
+	@GetMapping(value = "/getPhotos/{id}")
+	public List<Image> getPhotos(@PathVariable(value = "id") Long id) {
+		return storageImage.getAllPhotos(id);
 	}
 
 }
