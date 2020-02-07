@@ -24,6 +24,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fivePoints.security.entities.Role;
 
 @Entity
@@ -213,18 +215,22 @@ public class User {
 		this.images = images;
 	}
 
+	@JsonIgnore
 	public List<Matching> getUsers() {
 		return users;
 	}
 
+	@JsonSetter
 	public void setUsers(List<Matching> users) {
 		this.users = users;
 	}
 
+	@JsonIgnore
 	public List<Matching> getUserMatching() {
 		return UserMatching;
 	}
 
+	@JsonSetter
 	public void setUserMatching(List<Matching> userMatching) {
 		UserMatching = userMatching;
 	}

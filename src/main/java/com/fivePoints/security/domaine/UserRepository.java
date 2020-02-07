@@ -29,5 +29,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	@Query("Select u From User u Where u.gender ='Femele'")
 	List<User> findFemale();
-
+	
 }

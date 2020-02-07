@@ -6,9 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
-
 @Entity
 public class Matching {
 
@@ -38,22 +35,18 @@ public class Matching {
 		this.idMatching = idMatching;
 	}
 
-	@JsonIgnore
 	public User getIdFrom() {
 		return idFrom;
 	}
 
-	@JsonSetter
 	public void setIdFrom(User idFrom) {
 		this.idFrom = idFrom;
 	}
 
-	@JsonIgnore
 	public User getIdTo() {
 		return idTo;
 	}
 
-	@JsonSetter
 	public void setIdTo(User idTo) {
 		this.idTo = idTo;
 	}

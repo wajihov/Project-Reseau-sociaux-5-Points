@@ -21,4 +21,9 @@ public class FormMatching {
 		this.idTo = idTo;
 	}
 
+	@Override
+	public String toString() {
+		return "FormMatching [idFrom=" + idFrom + ", idTo=" + idTo + "]";
+	}
+
 }
