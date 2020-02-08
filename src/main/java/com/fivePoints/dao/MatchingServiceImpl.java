@@ -91,11 +91,12 @@ public class MatchingServiceImpl implements IMatching {
 		return machingRepository.findById(id).get();
 	}
 
+	// pour desactiver les buttons match de chaque id
 	@Override
 	public List<User> findListUserByIdFrom(Long id) {
 		List<Matching> lists = machingRepository.findByIdFrom(id);
 		List<User> users = new ArrayList<User>();
-		lists.forEach(match -> users.add(match.getIdTo() ));
+		lists.forEach(match -> users.add(match.getIdTo()));
 		return users;
 	}
 
@@ -107,6 +108,17 @@ public class MatchingServiceImpl implements IMatching {
 	@Override
 	public List<Matching> listsMatching() {
 		return machingRepository.findAll();
+	}
+
+	// liste des amis avec un id donnee
+	@Override
+	public List<User> listUsersAmant(Long id) {
+		List<Matching> listsIdFrom = machingRepository.listUsersAmantByIdFrom(id);
+		List<Matching> listsIdTo = machingRepository.listUsersAmantByIdTo(id);
+		List<User> users = new ArrayList<User>();
+		listsIdFrom.forEach(match -> users.add(match.getIdTo()));
+		listsIdTo.forEach(match -> users.add(match.getIdFrom()));
+		return users;
 	}
 
 }

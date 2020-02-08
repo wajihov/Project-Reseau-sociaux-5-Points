@@ -47,6 +47,7 @@ public class MatchingController {
 		return matchingServiceImpl.getMatching(idMatch);
 	}
 
+	// pour desactiver le buton match de chaque personne envoyer une demande 
 	@GetMapping("/getlistFrom/{id}")
 	public List<User> getAllIdFrom(@PathVariable(value = "id") Long idMatch) {
 		return matchingServiceImpl.findListUserByIdFrom(idMatch);
@@ -60,6 +61,12 @@ public class MatchingController {
 	@GetMapping("/getlistMatching")
 	public List<Matching> getAllMatching() {
 		return matchingServiceImpl.listsMatching();
+	}
+	
+	// afficher la liste des amis 
+	@GetMapping("/getlistAmant/{id}")
+	public List<User> getAllAmant(@PathVariable(value="id")Long id) {
+		return matchingServiceImpl.listUsersAmant(id);
 	}
 
 }

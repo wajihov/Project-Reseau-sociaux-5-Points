@@ -18,12 +18,16 @@ public interface IMatching {
 	boolean deleteMatching(Long idMatching);
 
 	Matching listsMatchingId(Long idMatch);
-	
+
 	Matching getMatching(Long id);
-	
+
 	List<User> findListUserByIdFrom(Long id);
-	
+
 	Matching getMatchingById(Long id);
-	
+
 	List<Matching> listsMatching();
+
+	List<User> listUsersAmant(Long id);
+	
+	
 }
