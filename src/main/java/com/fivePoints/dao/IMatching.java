@@ -28,6 +28,7 @@ public interface IMatching {
 	List<Matching> listsMatching();
 
 	List<User> listUsersAmant(Long id);
-	
-	
+
+	List<User> listSentMatch(Long id);
+
 }

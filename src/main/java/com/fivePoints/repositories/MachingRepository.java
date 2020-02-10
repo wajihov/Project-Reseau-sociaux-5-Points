@@ -28,4 +28,8 @@ public interface MachingRepository extends JpaRepository<Matching, Long> {
 	@Query("Select u From Matching u Where u.idTo.id=?1 and u.state=1")
 	List<Matching> listUsersAmantByIdTo(Long id);
 
+	// select list des profiles envoyer match 
+	@Query("Select u From Matching u Where u.idFrom.id=?1 and u.state=0")
+	List<Matching> listSentMatching(Long id);
+
 }

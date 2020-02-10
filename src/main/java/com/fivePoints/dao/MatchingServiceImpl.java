@@ -121,4 +121,12 @@ public class MatchingServiceImpl implements IMatching {
 		return users;
 	}
 
+	@Override
+	public List<User> listSentMatch(Long id) {
+		List<Matching> listSentMatch = machingRepository.listSentMatching(id);
+		List<User> listSent = new ArrayList<User>();
+		listSentMatch.forEach(sent -> listSent.add(sent.getIdTo()));
+		return listSent;
+	}
+
 }
