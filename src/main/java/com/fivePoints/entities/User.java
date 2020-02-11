@@ -1,5 +1,6 @@
 package com.fivePoints.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +27,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fivePoints.Socket.entities.Conversation;
+import com.fivePoints.Socket.entities.Message;
 import com.fivePoints.security.entities.Role;
 
 @Entity
@@ -77,6 +80,18 @@ public class User {
 	private EyesColor eyesColor;
 	private boolean blocked;
 	private boolean enabled;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user1")
+	private List<Conversation> conversationsuser1 = new ArrayList<Conversation>();
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user2")
+	private List<Conversation> conversationsuser2 = new ArrayList<Conversation>();
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	private List<Message> message = new ArrayList<Message>();
 
 	public User() {
 	}
@@ -233,6 +248,30 @@ public class User {
 	@JsonSetter
 	public void setUserMatching(List<Matching> userMatching) {
 		UserMatching = userMatching;
+	}
+
+	public List<Conversation> getConversationsuser1() {
+		return conversationsuser1;
+	}
+
+	public void setConversationsuser1(List<Conversation> conversationsuser1) {
+		this.conversationsuser1 = conversationsuser1;
+	}
+
+	public List<Conversation> getConversationsuser2() {
+		return conversationsuser2;
+	}
+
+	public void setConversationsuser2(List<Conversation> conversationsuser2) {
+		this.conversationsuser2 = conversationsuser2;
+	}
+
+	public List<Message> getMessage() {
+		return message;
+	}
+
+	public void setMessage(List<Message> message) {
+		this.message = message;
 	}
 
 	@Override

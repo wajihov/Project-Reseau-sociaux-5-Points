@@ -76,5 +76,7 @@ public class MatchingController {
 	public List<User> getSentMAtch(@PathVariable(value = "id") Long idMatch) {
 		return matchingServiceImpl.listSentMatch(idMatch);
 	}
+	
+	
 
 }
