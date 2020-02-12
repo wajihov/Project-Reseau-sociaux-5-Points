@@ -2,13 +2,12 @@ package com.fivePoints.Socket.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.core.AbstractMessageSendingTemplate;
-//import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fivePoints.Socket.entities.Conversation;
@@ -23,9 +22,8 @@ import com.fivePoints.security.domaine.UserRepository;
 @RequestMapping("/message")
 public class MessageController {
 
-	/*
-	 * @Autowired private SimpMessagingTemplate messagingTemplate;
-	 */
+	@Autowired
+	private SimpMessagingTemplate template;
 
 	@Autowired
 	MessageService messageService;
@@ -36,8 +34,8 @@ public class MessageController {
 	@Autowired
 	UserRepository userRepository;
 
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/sendMessage/{idUser}/{idConv}", method = RequestMethod.POST)
+	@PostMapping("/sendMessage/{idUser}/{idConv}")
+	// @RequestMapping(value = , method = RequestMethod.POST)
 	public ResponseEntity<?> sendMessage(@PathVariable("idUser") Long idUser, @PathVariable("idConv") Long idConv,
 			@RequestBody String obj) throws Exception {
 		Message message = new Message();
@@ -48,7 +46,7 @@ public class MessageController {
 		message.setConversation(conv);
 		message.setContent(obj);
 		messageService.sendMessage(message);
-		((AbstractMessageSendingTemplate<String>) messageService).convertAndSend("/chat/sendDone", message);
+		template.convertAndSend("/chat/sendDone", message);
 		return ResponseEntity.ok("done");
 	}
 }
