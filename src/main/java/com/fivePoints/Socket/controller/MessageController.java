@@ -47,6 +47,6 @@ public class MessageController {
 		message.setContent(obj);
 		messageService.sendMessage(message);
 		template.convertAndSend("/chat/sendDone", message);
-		return ResponseEntity.ok("done");
+		return ResponseEntity.ok(user);
 	}
 }
