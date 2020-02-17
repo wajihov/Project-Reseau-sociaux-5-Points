@@ -122,11 +122,29 @@ public class MatchingServiceImpl implements IMatching {
 	}
 
 	@Override
-	public List<User> listSentMatch(Long id) {
+	public List<Matching> listSentMatch(Long id) {
 		List<Matching> listSentMatch = machingRepository.listSentMatching(id);
-		List<User> listSent = new ArrayList<User>();
-		listSentMatch.forEach(sent -> listSent.add(sent.getIdTo()));
-		return listSent;
+		/*
+		 * List<User> listSent = new ArrayList<User>(); listSentMatch.forEach(sent ->
+		 * listSent.add(sent.getIdFrom()));
+		 */
+		return listSentMatch;
+	}
+
+	@Override
+	public List<User> listDisabledMatch(Long id) {
+		List<Matching> listSentMatch = machingRepository.listSentMatching(id);
+		List<User> listFrom = new ArrayList<User>();
+		listSentMatch.forEach(sent -> listFrom.add(sent.getIdFrom()));
+		return listFrom;
+	}
+
+	@Override
+	public List<User> listMatchedByUser(Long id) {	
+		List<Matching> listSentMatch = machingRepository.listSentMatched(id);
+		List<User> listFrom = new ArrayList<User>();
+		listSentMatch.forEach(sent -> listFrom.add(sent.getIdTo()));
+		return listFrom;
 	}
 
 }

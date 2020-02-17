@@ -21,7 +21,6 @@ public class ConversationController {
 	@GetMapping("/getOneConversation/{idUser1}/{idUser2}")
 	public ResponseEntity<?> getOneConversation(@PathVariable("idUser1") Long idUser1,
 			@PathVariable("idUser2") Long idUser2) throws Exception {
-		System.out.println("dans getOne conversation : " + idUser1 + " / user 2/ " + idUser2);
 		return ResponseEntity.ok(conversationService.getOneConversation(idUser1, idUser2));
 	}
 }

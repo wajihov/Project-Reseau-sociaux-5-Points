@@ -34,11 +34,13 @@ public class MatchingController {
 
 	@PutMapping("/friendly/{idMatching}")
 	public void matchingFriendly(@PathVariable(name = "idMatching") Long idMatching) {
+		System.out.println("Dans friendly : " + idMatching);
 		matchingServiceImpl.addFriendly(idMatching);
 	}
 
 	@DeleteMapping("/delete/{idMatching}")
 	public boolean deleteMatching(@PathVariable(name = "idMatching") Long idMatching) {
+		System.out.println("delete : " + idMatching);
 		return matchingServiceImpl.deleteMatching(idMatching);
 	}
 
@@ -64,19 +66,27 @@ public class MatchingController {
 	}
 
 	// afficher la liste des amis
-
 	@GetMapping("/getlistAmant/{id}")
 	public List<User> getAllAmant(@PathVariable(value = "id") Long id) {
 		return matchingServiceImpl.listUsersAmant(id);
 	}
 
-	// desactiver le button match lorsque on match user
-
+	// list of notification of id
 	@GetMapping("/getSentUser/{id}")
-	public List<User> getSentMAtch(@PathVariable(value = "id") Long idMatch) {
+	public List<Matching> getSentMAtch(@PathVariable(value = "id") Long idMatch) {
 		return matchingServiceImpl.listSentMatch(idMatch);
 	}
-	
-	
+
+	// list of notification of id
+	@GetMapping("/getDisabledUser/{id}")
+	public List<User> getdisabledMatch(@PathVariable(value = "id") Long idMatch) {
+		return matchingServiceImpl.listDisabledMatch(idMatch);
+	}
+
+	// list of notification of id
+	@GetMapping("/getMatchedUser/{id}")
+	public List<User> getUserMatchedByUser(@PathVariable(value = "id") Long idMatch) {
+		return matchingServiceImpl.listMatchedByUser(idMatch);
+	}
 
 }

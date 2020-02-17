@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import com.fivePoints.entities.Matching;
+import com.fivePoints.entities.User;
 
 @RestResource
 public interface MachingRepository extends JpaRepository<Matching, Long> {
@@ -28,8 +29,19 @@ public interface MachingRepository extends JpaRepository<Matching, Long> {
 	@Query("Select u From Matching u Where u.idTo.id=?1 and u.state=1")
 	List<Matching> listUsersAmantByIdTo(Long id);
 
-	// select list des profiles envoyer match
-	@Query("Select u From Matching u Where u.idFrom.id=?1 and u.state=0")
+	// list profiles display in notification
+	@Query("Select u From Matching u Where u.idTo.id=?1 and u.state=0")
 	List<Matching> listSentMatching(Long id);
+	
+	@Query("Select u From Matching u Where u.idFrom.id=?1 and u.state=0")
+	List<Matching> listSentMatched(Long id);
+
+	// list user matched by another user
+	@Query("Select u From Matching u Where u.idTo.id=?1 and u.state=0")
+	List<User> listIdFromMatching(Long id);
+
+	// list user matched by user
+	@Query("Select u From Matching u Where u.idFrom.id=?1 and u.state=0")
+	List<User> listIdToMatching(Long id);
 
 }

@@ -99,6 +99,15 @@ public class UserController {
 		return userService.comparePassword(password.getPassword(), password.getId());
 	}
 
+	@PutMapping("/updatePassword/{id}")
+	public ResponseEntity<User> updatePasswordUser(@PathVariable(value = "id") Long userId,
+			@RequestBody User userDetails) {
+		System.out.println("le profile : " + userId + " " + userDetails);
+
+		User user = userService.updateAccountUser(userId, userDetails);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
+	}
+
 	@GetMapping("/allMale")
 	public List<User> getAllMale() {
 		return userService.getAllMale();
