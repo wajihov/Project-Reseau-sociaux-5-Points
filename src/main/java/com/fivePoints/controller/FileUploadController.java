@@ -25,6 +25,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -247,6 +248,18 @@ public class FileUploadController {
 	@GetMapping(value = "/getPhotos/{id}")
 	public List<Image> getPhotos(@PathVariable(value = "id") Long id) {
 		return storageImage.getAllPhotos(id);
+	}
+
+	@DeleteMapping(value = "/deleteImage/{id}")
+	public ResponseEntity<?> deleteImage(@PathVariable(value = "id") Long idImage) {
+		Image image = storageImage.findById(idImage).get();
+		if (image != null) {
+			storageImage.deleteById(idImage);
+			MessageResponse message = new MessageResponse("image is deleted succefully");
+			return new ResponseEntity<>(message, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }
