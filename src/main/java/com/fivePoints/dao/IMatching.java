@@ -34,5 +34,7 @@ public interface IMatching {
 	List<User> listDisabledMatch(Long id);
 	
 	List<User> listMatchedByUser(Long id);
+	
+	List<Matching> listMatchedByUserId(Long id);
 
 }

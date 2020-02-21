@@ -89,4 +89,9 @@ public class MatchingController {
 		return matchingServiceImpl.listMatchedByUser(idMatch);
 	}
 
+	@GetMapping("/getMatchedUserById/{id}")
+	public List<Matching> getMatchedbyId(@PathVariable(value = "id") Long id) {
+		return matchingServiceImpl.listMatchedByUserId(id);
+	}
+
 }
