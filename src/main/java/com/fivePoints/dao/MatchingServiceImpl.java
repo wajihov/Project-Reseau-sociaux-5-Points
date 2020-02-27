@@ -153,4 +153,15 @@ public class MatchingServiceImpl implements IMatching {
 		return listSentMatch;
 	}
 
+	@Override
+	public Boolean  deleteMatching(Long id1, Long id2) {
+		Matching matching = machingRepository.getMatching(id1, id2);
+		if (matching != null) {
+			machingRepository.delete(matching);
+			return true;
+		}
+		else return false;
+		
+	}
+
 }

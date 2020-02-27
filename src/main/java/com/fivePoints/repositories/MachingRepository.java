@@ -43,5 +43,8 @@ public interface MachingRepository extends JpaRepository<Matching, Long> {
 	// list user matched by user
 	@Query("Select u From Matching u Where u.idFrom.id=?1 and u.state=0")
 	List<User> listIdToMatching(Long id);
+	
+	@Query("SELECT u FROM Matching u WHERE (u.idFrom.id=?1 and idTo.id=?2) or (idFrom.id=?2 and idTo.id=?1)")
+	Matching getMatching(Long id1, Long id2);
 
 }

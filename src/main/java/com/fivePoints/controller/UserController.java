@@ -38,6 +38,11 @@ public class UserController {
 	@Autowired
 	JwtProvider jwtProvider;
 
+	@GetMapping("/String")	
+	public ResponseEntity<String> getString() {
+		return new ResponseEntity<String>("Test has worked, biatch!", HttpStatus.OK);
+	}
+	
 	@GetMapping("/getAll")
 	public ResponseEntity<List<User>> getAllUsers() {
 		return ResponseEntity.ok().body(userService.findAll());
